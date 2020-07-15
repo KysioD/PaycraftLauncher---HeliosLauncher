@@ -170,7 +170,7 @@ function updateSelectedServer(serv){
 //}
 
 // Update Mojang Status Color
-const refreshMojangStatuses = async function(){
+/*const refreshMojangStatuses = async function(){
     loggerLanding.log('Refreshing Mojang Statuses..')
 
     let status = 'grey'
@@ -187,11 +187,6 @@ const refreshMojangStatuses = async function(){
 
             if(service.essential){
                 tooltipEssentialHTML += `<div class="mojangStatusContainer">
-                    <span class="mojangStatusIcon" style="color: ${Mojang.statusToHex(service.status)};">&#8226;</span>
-                    <span class="mojangStatusName">${service.name}</span>
-                </div>`
-            } else {
-                tooltipNonEssentialHTML += `<div class="mojangStatusContainer">
                     <span class="mojangStatusIcon" style="color: ${Mojang.statusToHex(service.status)};">&#8226;</span>
                     <span class="mojangStatusName">${service.name}</span>
                 </div>`
@@ -226,7 +221,7 @@ const refreshMojangStatuses = async function(){
     document.getElementById('mojangStatusEssentialContainer').innerHTML = tooltipEssentialHTML
     document.getElementById('mojangStatusNonEssentialContainer').innerHTML = tooltipNonEssentialHTML
     document.getElementById('mojang_status_icon').style.color = Mojang.statusToHex(status)
-}
+}*/
 
 const refreshServerStatus = async function(fade = false){
     loggerLanding.log('Refreshing Server Status')
@@ -236,7 +231,7 @@ const refreshServerStatus = async function(fade = false){
     let pVal = 'OFFLINE'
 
     try {
-        const serverURL = new URL('my://paycraft.me/')
+        const serverURL = new URL('daemon-de-standard-02.cursehosting.fr:25671')
         const servStat = await ServerStatus.getStatus(serverURL.hostname, serverURL.port)
         if(servStat.online){
             pLabel = 'PLAYERS'
@@ -260,12 +255,12 @@ const refreshServerStatus = async function(fade = false){
     
 }
 
-refreshMojangStatuses()
+//refreshMojangStatuses()
 // Server Status is refreshed in uibinder.js on distributionIndexDone.
 
 // Set refresh rate to once every 5 minutes.
-let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 300000)
-let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
+//let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 300000)
+//let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
 
 /**
  * Shows an error overlay, toggles off the launch area.
@@ -1096,7 +1091,12 @@ function displayArticle(articleObject, index){
  * distribution index.
  */
 function loadNews(){
-    return new Promise((resolve, reject) => {
+    let socketmanager = require('./assets/js/scripts/socketmanager.js')
+
+    socketmanager.getNews(function(json){
+        console.log(json);
+    });
+    /*return new Promise((resolve, reject) => {
         const distroData = DistroManager.getDistribution()
         const newsFeed = distroData.getRSS()
         const newsHost = new URL(newsFeed).origin + '/'
@@ -1152,5 +1152,8 @@ function loadNews(){
                 articles: null
             })
         })
-    })
+    })*/
+
+
+
 }

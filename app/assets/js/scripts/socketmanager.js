@@ -22,6 +22,23 @@ module.exports.loginClient = function(username, password, callback){
     });
 };
 
+module.exports.getNews = function(callback){
+    const net = require('net');
+    let socket = new net.Socket();
+
+    socket.connect(port, host, function(){
+        socket.write('news');
+
+        socket.on('data', function(data){ 
+            console.log('news list : '+data);
+
+            const newsList = JSON.parse();
+
+            callback(newsList);
+        });
+    });
+}
+
 module.exports.serverOnline = function(){
     const net = require('net');
     let socket = new net.Socket();
