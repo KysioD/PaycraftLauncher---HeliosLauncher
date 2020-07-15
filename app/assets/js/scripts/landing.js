@@ -20,7 +20,9 @@ const launch_progress_label   = document.getElementById('launch_progress_label')
 const launch_details_text     = document.getElementById('launch_details_text')
 //const server_selection_button = document.getElementById('server_selection_button')
 const user_text               = document.getElementById('user_text')
-const rank_textj               = document.getElementById('rank_text')
+const rank_text               = document.getElementById('rank_text')
+const money_text               = document.getElementById('money_text')
+const xp_text               = document.getElementById('xp_text')
 
 const loggerLanding = LoggerUtil('%c[Landing]', 'color: #000668; font-weight: bold')
 
@@ -127,10 +129,14 @@ document.getElementById('avatarOverlay').onclick = (e) => {
 function updateSelectedAccount(authUser){
     let username = 'No Account Selected'
     let rank = 'Unknown rank'
+    let money = 'Unknown'
+    let xp = 'Unknown'
     if(authUser != null){
         if(authUser.username != null){
             username = authUser.username
             rank = authUser.rank
+            money = authUser.money
+            xp = authUser.xp
         }
         if(authUser.uuid != null){
             document.getElementById('avatarContainer').style.backgroundImage = `url('https://crafatar.com/renders/body/${authUser.uuid}')`
@@ -138,6 +144,8 @@ function updateSelectedAccount(authUser){
     }
     user_text.innerHTML = username
     rank_text.innerHTML = rank
+    money_text.innerHTML = 'money : '+money
+    xp_text.innerHTML = 'xp : '+xp
 }
 updateSelectedAccount(ConfigManager.getSelectedAccount())
 
