@@ -774,9 +774,9 @@ function dlAsync(login = true){
 // DOM Cache
 const newsContent                   = document.getElementById('newsContent')
 const newsArticleTitle              = document.getElementById('newsArticleTitle')
-const newsArticleDate               = document.getElementById('newsArticleDate')
+//const newsArticleDate               = document.getElementById('newsArticleDate')
 const newsArticleAuthor             = document.getElementById('newsArticleAuthor')
-const newsArticleComments           = document.getElementById('newsArticleComments')
+//const newsArticleComments           = document.getElementById('newsArticleComments')
 const newsNavigationStatus          = document.getElementById('newsNavigationStatus')
 const newsArticleContentScrollable  = document.getElementById('newsArticleContentScrollable')
 const nELoadSpan                    = document.getElementById('nELoadSpan')
@@ -1070,11 +1070,11 @@ document.addEventListener('keydown', (e) => {
  */
 function displayArticle(articleObject, index){
     newsArticleTitle.innerHTML = articleObject.title
-    newsArticleTitle.href = articleObject.link
+    //newsArticleTitle.href = articleObject.link
     newsArticleAuthor.innerHTML = 'by ' + articleObject.author
-    newsArticleDate.innerHTML = articleObject.date
-    newsArticleComments.innerHTML = articleObject.comments
-    newsArticleComments.href = articleObject.commentsLink
+    //newsArticleDate.innerHTML = articleObject.date
+    //newsArticleComments.innerHTML = articleObject.comments
+    //newsArticleComments.href = articleObject.commentsLink
     newsArticleContentScrollable.innerHTML = '<div id="newsArticleContentWrapper"><div class="newsArticleSpacerTop"></div>' + articleObject.content + '<div class="newsArticleSpacerBot"></div></div>'
     Array.from(newsArticleContentScrollable.getElementsByClassName('bbCodeSpoilerButton')).forEach(v => {
         v.onclick = () => {
@@ -1091,68 +1091,68 @@ function displayArticle(articleObject, index){
  * distribution index.
  */
 function loadNews(){
-    let socketmanager = require('./assets/js/scripts/socketmanager.js')
+    return new Promise((resolve, reject) => {
+        let socketmanager = require('./assets/js/scripts/socketmanager.js')
 
-    socketmanager.getNews(function(json){
-        console.log(json);
-    });
-    /*return new Promise((resolve, reject) => {
-        const distroData = DistroManager.getDistribution()
-        const newsFeed = distroData.getRSS()
-        const newsHost = new URL(newsFeed).origin + '/'
-        $.ajax({
-            url: newsFeed,
-            success: (data) => {
-                const items = $(data).find('item')
+        socketmanager.getNews(function(news){
+        //$.ajax({
+            //url: newsFeed,
+            //success: (data) => {
+                //const items = $(data).find('item')
                 const articles = []
 
-                for(let i=0; i<items.length; i++){
+                for(let i=0; i<news.length; i++){
                 // JQuery Element
-                    const el = $(items[i])
+                    const json = news[i]//+"}"
+
+                    console.log('json : '+json)
+
+                    const el = JSON.parse(json)
+
+                    console.log('el : '+el)
 
                     // Resolve date.
-                    const date = new Date(el.find('pubDate').text()).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'})
+                    //const date = new Date(el.find('pubDate').text()).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'})
 
                     // Resolve comments.
-                    let comments = el.find('slash\\:comments').text() || '0'
-                    comments = comments + ' Comment' + (comments === '1' ? '' : 's')
+                    //let comments = el.find('slash\\:comments').text() || '0'
+                    //comments = comments + ' Comment' + (comments === '1' ? '' : 's')
 
                     // Fix relative links in content.
-                    let content = el.find('content\\:encoded').text()
-                    let regex = /src="(?!http:\/\/|https:\/\/)(.+?)"/g
+                    let content = el.description
+
+                    console.log('content : '+content)
+                    /*let regex = /src="(?!http:\/\/|https:\/\/)(.+?)"/g
                     let matches
                     while((matches = regex.exec(content))){
                         content = content.replace(`"${matches[1]}"`, `"${newsHost + matches[1]}"`)
                     }
 
-                    let link   = el.find('link').text()
-                    let title  = el.find('title').text()
-                    let author = el.find('dc\\:creator').text()
+                    let link   = el.find('link').text()*/
+                    let title  = el.title
+                    let author = el.author
 
                     // Generate article.
                     articles.push(
                         {
-                            link,
                             title,
-                            date,
                             author,
-                            content,
-                            comments,
-                            commentsLink: link + '#comments'
+                            content
                         }
                     )
                 }
                 resolve({
                     articles
                 })
-            },
-            timeout: 2500
-        }).catch(err => {
+            //},
+            //timeout: 2500
+        /*}).catch(err => {
             resolve({
                 articles: null
             })
-        })
-    })*/
+        })*/
+        });
+    })
 
 
 

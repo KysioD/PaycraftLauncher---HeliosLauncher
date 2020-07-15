@@ -15,7 +15,7 @@ module.exports.loginClient = function(username, password, callback){
 
                 socket.end();
                 socket.destroy();
-            
+
                 callback(data);
                 //return data === 'Login OK';
              });
@@ -30,14 +30,17 @@ module.exports.getNews = function(callback){
         socket.write('news');
 
         socket.on('data', function(data){ 
-            console.log('news list : '+data);
+            console.log('news list : '+String(data));
 
-            const newsList = JSON.parse();
+            let news = String(data).split("$split$");
 
-            callback(newsList);
+            console.log('news : '+news);
+
+            callback(news);
         });
     });
 }
+
 
 module.exports.serverOnline = function(){
     const net = require('net');
