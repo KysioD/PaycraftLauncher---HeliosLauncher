@@ -20,6 +20,7 @@ const launch_progress_label   = document.getElementById('launch_progress_label')
 const launch_details_text     = document.getElementById('launch_details_text')
 //const server_selection_button = document.getElementById('server_selection_button')
 const user_text               = document.getElementById('user_text')
+const rank_textj               = document.getElementById('rank_text')
 
 const loggerLanding = LoggerUtil('%c[Landing]', 'color: #000668; font-weight: bold')
 
@@ -125,15 +126,18 @@ document.getElementById('avatarOverlay').onclick = (e) => {
 // Bind selected account
 function updateSelectedAccount(authUser){
     let username = 'No Account Selected'
+    let rank = 'Unknown rank'
     if(authUser != null){
         if(authUser.username != null){
             username = authUser.username
+            rank = authUser.rank
         }
         if(authUser.uuid != null){
             document.getElementById('avatarContainer').style.backgroundImage = `url('https://crafatar.com/renders/body/${authUser.uuid}')`
         }
     }
     user_text.innerHTML = username
+    rank_text.innerHTML = rank
 }
 updateSelectedAccount(ConfigManager.getSelectedAccount())
 
@@ -224,7 +228,7 @@ const refreshServerStatus = async function(fade = false){
     let pVal = 'OFFLINE'
 
     try {
-        const serverURL = new URL('my://' + serv.getAddress())
+        const serverURL = new URL('my://paycraft.me/')
         const servStat = await ServerStatus.getStatus(serverURL.hostname, serverURL.port)
         if(servStat.online){
             pLabel = 'PLAYERS'
