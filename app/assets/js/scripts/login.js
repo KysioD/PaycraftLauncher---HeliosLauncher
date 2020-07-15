@@ -55,7 +55,8 @@ function shakeError(element){
  */
 function validateEmail(value){
     if(value){
-        if(!basicEmail.test(value) && !validUsername.test(value)){
+        lu = true;
+        /*if(!basicEmail.test(value) && !validUsername.test(value)){
             showError(loginEmailError, Lang.queryJS('login.error.invalidValue'))
             loginDisabled(true)
             lu = false
@@ -65,7 +66,7 @@ function validateEmail(value){
             if(lp){
                 loginDisabled(false)
             }
-        }
+        }*/
     } else {
         lu = false
         showError(loginEmailError, Lang.queryJS('login.error.requiredValue'))

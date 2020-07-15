@@ -6,7 +6,7 @@ const logger = require('./loggerutil')('%c[ConfigManager]', 'color: #a02d2a; fon
 
 const sysRoot = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME)
 // TODO change
-const dataPath = path.join(sysRoot, '.helioslauncher')
+const dataPath = path.join(sysRoot, '.paycraftlauncher')
 
 // Forked processes do not have access to electron, so we have this workaround.
 const launcherDir = process.env.CONFIG_DIRECT_PATH || require('electron').remote.app.getPath('userData')
@@ -340,15 +340,16 @@ exports.updateAuthAccount = function(uuid, accessToken){
  * 
  * @returns {Object} The authenticated account object created by this action.
  */
-exports.addAuthAccount = function(uuid, accessToken, username, displayName){
-    config.selectedAccount = uuid
+//exports.addAuthAccount = function(uuid, accessToken, username, displayName){
+exports.addAuthAccount = function(username, password){
+    //config.selectedAccount = uuid
     config.authenticationDatabase[uuid] = {
-        accessToken,
         username: username.trim(),
-        uuid: uuid.trim(),
-        displayName: displayName.trim()
+        password: password.trim()
+        //uuid: uuid.trim(),
+        //displayName: displayName.trim()
     }
-    return config.authenticationDatabase[uuid]
+    return config.authenticationDatabase
 }
 
 /**

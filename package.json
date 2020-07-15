@@ -1,7 +1,7 @@
 {
-  "name": "helioslauncher",
+  "name": "paycraftlauncher",
   "version": "1.7.0",
-  "productName": "Helios Launcher",
+  "productName": "Paycraft Launcher",
   "description": "Modded Minecraft Launcher",
   "author": "Daniel Scalzi (https://github.com/dscalzi/)",
   "license": "UNLICENSED",
