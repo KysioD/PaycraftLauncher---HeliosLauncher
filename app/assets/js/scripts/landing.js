@@ -18,7 +18,7 @@ const launch_details          = document.getElementById('launch_details')
 const launch_progress         = document.getElementById('launch_progress')
 const launch_progress_label   = document.getElementById('launch_progress_label')
 const launch_details_text     = document.getElementById('launch_details_text')
-const server_selection_button = document.getElementById('server_selection_button')
+//const server_selection_button = document.getElementById('server_selection_button')
 const user_text               = document.getElementById('user_text')
 
 const loggerLanding = LoggerUtil('%c[Landing]', 'color: #000668; font-weight: bold')
@@ -126,8 +126,8 @@ document.getElementById('avatarOverlay').onclick = (e) => {
 function updateSelectedAccount(authUser){
     let username = 'No Account Selected'
     if(authUser != null){
-        if(authUser.displayName != null){
-            username = authUser.displayName
+        if(authUser.username != null){
+            username = authUser.username
         }
         if(authUser.uuid != null){
             document.getElementById('avatarContainer').style.backgroundImage = `url('https://crafatar.com/renders/body/${authUser.uuid}')`
@@ -144,18 +144,18 @@ function updateSelectedServer(serv){
     }
     ConfigManager.setSelectedServer(serv != null ? serv.getID() : null)
     ConfigManager.save()
-    server_selection_button.innerHTML = '\u2022 ' + (serv != null ? serv.getName() : 'No Server Selected')
+    //server_selection_button.innerHTML = '\u2022 ' + (serv != null ? serv.getName() : 'No Server Selected')
     if(getCurrentView() === VIEWS.settings){
         animateModsTabRefresh()
     }
     setLaunchEnabled(serv != null)
 }
 // Real text is set in uibinder.js on distributionIndexDone.
-server_selection_button.innerHTML = '\u2022 Loading..'
-server_selection_button.onclick = (e) => {
-    e.target.blur()
-    toggleServerSelection(true)
-}
+//server_selection_button.innerHTML = '\u2022 Loading..'
+//server_selection_button.onclick = (e) => {
+//    e.target.blur()
+//    toggleServerSelection(true)
+//}
 
 // Update Mojang Status Color
 const refreshMojangStatuses = async function(){

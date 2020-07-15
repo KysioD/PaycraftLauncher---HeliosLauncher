@@ -342,14 +342,14 @@ exports.updateAuthAccount = function(uuid, accessToken){
  */
 //exports.addAuthAccount = function(uuid, accessToken, username, displayName){
 exports.addAuthAccount = function(username, password){
-    //config.selectedAccount = uuid
-    config.authenticationDatabase[uuid] = {
+    config.selectedAccount = username
+    config.authenticationDatabase[username] = {
         username: username.trim(),
         password: password.trim()
         //uuid: uuid.trim(),
         //displayName: displayName.trim()
     }
-    return config.authenticationDatabase
+    return config.authenticationDatabase[username]
 }
 
 /**
