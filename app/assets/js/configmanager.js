@@ -342,13 +342,17 @@ exports.updateAuthAccount = function(uuid, accessToken){
  */
 //exports.addAuthAccount = function(uuid, accessToken, username, displayName){
 exports.addAuthAccount = function(username, password){
+    console.log('adding account '+username)
     config.selectedAccount = username
+    console.log('selectedAccount = '+config.selectedAccount)
     config.authenticationDatabase[username] = {
-        username: username.trim(),
-        password: password.trim()
+        username: username,
+        password: password
         //uuid: uuid.trim(),
         //displayName: displayName.trim()
     }
+    console.log('authenticationDatabase username = '+config.authenticationDatabase[username])
+    
     return config.authenticationDatabase[username]
 }
 

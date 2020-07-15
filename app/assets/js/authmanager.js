@@ -28,22 +28,17 @@ const loggerSuccess = LoggerUtil('%c[AuthManager]', 'color: #209b07; font-weight
  */
 exports.addAccount = async function(username, password){
     ConfigManager.addAuthAccount(username, password)
-    /*try {
-        const session = await Mojang.authenticate(username, password, ConfigManager.getClientToken())
-        if(session.selectedProfile != null){
-            const ret = ConfigManager.addAuthAccount(session.selectedProfile.id, session.accessToken, username, session.selectedProfile.name)
-            if(ConfigManager.getClientToken() == null){
-                ConfigManager.setClientToken(session.clientToken)
+    try {
+            const ret = ConfigManager.addAuthAccount(username, password)
+            if(ConfigManager.username == null){
+                ConfigManager.username == username;
             }
             ConfigManager.save()
-            return ret
-        } else {
-            throw new Error('NotPaidAccount')
-        }
+            return ret;
         
     } catch (err){
         return Promise.reject(err)
-    }**/
+    }
 }
 
 /**

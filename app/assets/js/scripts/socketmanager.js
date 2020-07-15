@@ -1,5 +1,33 @@
+let host = 'localhost'
+let port = 25712
 
-let io = require('socket.io');
+module.exports.loginClient = function(username, password, callback){
+    const net = require('net');
 
-// Quand un client se connecte, on le note dans la console
-let socket = io.connect('localhost!')
+    let socket = new net.Socket();
+
+    socket.connect(port, host, function(){
+        socket.write("login: "+username.trim()+","+password.trim())
+
+            socket.on('data', function(data){
+                
+                console.log('result : '+data)
+
+                socket.end();
+                socket.destroy();
+            
+                callback(data);
+                //return data === 'Login OK';
+             });
+    });
+};
+
+module.exports.serverOnline = function(){
+    const net = require('net');
+    let socket = new net.Socket();
+
+    return socket.connect(port, host, function(){
+        socket.end();
+        socket.destroy();
+    });
+}
