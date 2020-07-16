@@ -341,7 +341,7 @@ exports.updateAuthAccount = function(uuid, accessToken){
  * @returns {Object} The authenticated account object created by this action.
  */
 //exports.addAuthAccount = function(uuid, accessToken, username, displayName){
-exports.addAuthAccount = function(username, password){
+exports.addAuthAccount = function(username, password, rank, money, xp){
     console.log('adding account '+username)
     config.selectedAccount = username
     console.log('selectedAccount = '+config.selectedAccount)

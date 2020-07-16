@@ -1,4 +1,4 @@
-let host = 'localhost'
+let host = 'daemon-de-standard-02.cursehosting.fr'
 let port = 25712
 
 module.exports.loginClient = function(username, password, callback){

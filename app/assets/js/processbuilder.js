@@ -420,7 +420,7 @@ class ProcessBuilder {
                     let val = null
                     switch(identifier){
                         case 'auth_player_name':
-                            val = this.authUser.displayName.trim()
+                            val = this.authUser.username
                             break
                         case 'version_name':
                             //val = versionData.id
@@ -436,13 +436,13 @@ class ProcessBuilder {
                             val = this.versionData.assets
                             break
                         case 'auth_uuid':
-                            val = this.authUser.uuid.trim()
+                            val = ''
                             break
                         case 'auth_access_token':
-                            val = this.authUser.accessToken
+                            val = ''
                             break
                         case 'user_type':
-                            val = 'mojang'
+                            val = ''
                             break
                         case 'version_type':
                             val = this.versionData.type
@@ -518,7 +518,7 @@ class ProcessBuilder {
                 let val = null
                 switch(identifier){
                     case 'auth_player_name':
-                        val = this.authUser.displayName.trim()
+                        val = this.authUser.username.trim()
                         break
                     case 'version_name':
                         //val = versionData.id
@@ -534,13 +534,13 @@ class ProcessBuilder {
                         val = this.versionData.assets
                         break
                     case 'auth_uuid':
-                        val = this.authUser.uuid.trim()
+                        val = ''
                         break
                     case 'auth_access_token':
-                        val = this.authUser.accessToken
+                        val = ''
                         break
                     case 'user_type':
-                        val = 'mojang'
+                        val = ''
                         break
                     case 'user_properties': // 1.8.9 and below.
                         val = '{}'
